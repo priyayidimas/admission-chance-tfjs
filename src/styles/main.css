@@ -1,0 +1,10 @@
+.container {
+    padding: 16px;
+}
+#sct-container .canvas{
+    width: 300px !important;;
+}
+
+#model-container table{
+    width: 100% !important;
+}

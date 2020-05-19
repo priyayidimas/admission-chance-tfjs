@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Admission</title>
+</head>
+<body>
+    <my-navbar title="Student Admission"></my-navbar>
+    <main class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header" id="crudHeader">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#crudBody" aria-expanded="true" aria-controls="crudBody">
+                                CRUD
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="crudBody" class="collapse show" aria-labelledby="crudHeader" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#theModal">Add Data</button>
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#insModal">Instruction</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="row">
+                                    <div class="col-12">
+                                        <br>
+                                        <table class="table table-bordered table-responsive" class="display" id="example" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>GRE Score</th>
+                                                    <th>TOEFL Score</th>
+                                                    <th>University Rating</th>
+                                                    <th>SOP</th>
+                                                    <th>LOR</th>
+                                                    <th>CGPA</th>
+                                                    <th>Has Research</th>
+                                                    <th>Admission Chance</th>
+                                                    <th>Edit</th>
+                                                    <th>Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="data"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="trainHeader">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#trainBody" aria-expanded="false" aria-controls="trainBody">
+                                    Model Training
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="trainBody" class="collapse" aria-labelledby="trainHeader" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5>Data Visualization</h5>
+                                        <div id="sct-container"></div>
+                                        <div id="sct-container2"></div>
+                                        <h5>Model Summary</h5>
+                                        <div id="model-container" style="width: 100%;"></div>
+                                        <button id="trainButton" class="btn btn-info mt-2 mb-2">Train Data</button>
+                                        <div id="train-container"></div>
+                                        <button id="evalButton" class="btn btn-success mt-2 mb-2" style="display: none;">Evaluate Data</button>
+                                        <div id="eval-container"></div>
+                                        <button type="button" class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#preModal" id="prediction" style="display: none;">Predict Data</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </main>
+    <div class="modals">
+        <div class="modal fade" id="insModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Dataset Structure/ Metadata</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <p><b>Name</b>, Text</p>
+                            <p><b>GRE (Graduate Record Examination) Score</b>, Integer From 0 to 340</p>
+                            <p><b>TOEFL Score</b>, Integer From 0 to 120</p>
+                            <p><b>University Rating</b>, Decimal from 0 to 5</p>
+                            <p><b>SoP (State of Purpose) Grade</b>, Decimal from 0 to 5</p>
+                            <p><b>LoR (Letter of Recommendation) Grade</b>, Decimal from 0 to 5</p>
+                            <p><b>CGPA (Cummulative Grade Point Average)</b>, Decimal from 0 to 10</p>
+                            <p><b>HasResearch ?</b>, Enum 1 - YES, 0 - NO</p>
+                            <p><b>Admission Chance</b>, Decimal From 0 to 1</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="theModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <input id="inputId" type="hidden" class="form-control" placeholder="ID">
+                            <div class="col-12 col-md-12 col-lg-4">
+                                <div class="form-group">
+                                    <label for="inputName">Name</label>
+                                    <input id="inputName" type="text" class="form-control" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-3">
+                                <div class="form-group">
+                                    <label for="inputGREScore">GREScore</label>
+                                    <input id="inputGREScore" type="number" min="0" max="340" class="form-control" placeholder="GREScore">
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-3">
+                                <div class="form-group">
+                                    <label for="inputTOEFLScore">TOEFLScore</label>
+                                    <input id="inputTOEFLScore" type="number" min="0" max="120" class="form-control" placeholder="TOEFLScore">
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-2">
+                                <div class="form-group">
+                                    <label for="inputUnivRating">UnivRating</label>
+                                    <input id="inputUnivRating" type="number" min="0" max="5" step="0.5" class="form-control" placeholder="UnivRating">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="inputSOP">SOP</label>
+                                    <input id="inputSOP" type="number" min="0" max="5" step="0.50" class="form-control" placeholder="SOP">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="inputLOR">LOR</label>
+                                    <input id="inputLOR" type="number" min="0" max="5" step="0.50" type="text" class="form-control" placeholder="LOR">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="inputCGPA">CGPA</label>
+                                    <input id="inputCGPA" type="number" min="0" max="10" step="0.01" class="form-control" placeholder="CGPA">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="inputRES">RES</label>
+                                    <input id="inputRES" type="number" min="0" max="1" class="form-control" placeholder="RES">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="inputAdmChance">AdmChance</label>
+                                    <input id="inputAdmChance" type="number" min="0" max="1" step="0.01" class="form-control" placeholder="AdmChance">
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <button id="buttonSave" class="btn btn-success">Save</button>
+                            <button id="buttonUpdate" class="btn btn-primary">Update</button>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="preModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Predict Data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-4 col-lg-3">
+                                <div class="form-group">
+                                    <label for="predGREScore">GREScore</label>
+                                    <input id="predGREScore" type="number" min="0" max="340" class="form-control" placeholder="GREScore">
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-3">
+                                <div class="form-group">
+                                    <label for="predTOEFLScore">TOEFLScore</label>
+                                    <input id="predTOEFLScore" type="number" min="0" max="120" class="form-control" placeholder="TOEFLScore">
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-2">
+                                <div class="form-group">
+                                    <label for="predUnivRating">UnivRating</label>
+                                    <input id="predUnivRating" type="number" min="0" max="5" step="0.5" class="form-control" placeholder="UnivRating">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="predSOP">SOP</label>
+                                    <input id="predSOP" type="number" min="0" max="5" step="0.50" class="form-control" placeholder="SOP">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="predLOR">LOR</label>
+                                    <input id="predLOR" type="number" min="0" max="5" step="0.50" type="text" class="form-control" placeholder="LOR">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="predCGPA">CGPA</label>
+                                    <input id="predCGPA" type="number" min="0" max="10" step="0.10" class="form-control" placeholder="CGPA">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="predRES">RES</label>
+                                    <input id="predRES" type="number" min="0" max="1" class="form-control" placeholder="RES">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="predAdmChance">AdmChance</label>
+                                    <p id="predAdmChance"></p>
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="predButton" class="btn btn-primary">Predict</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Data</h5>
+                            <input type="hidden" id="delId">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                    <p>Are You Sure Want To Delete This Data ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="buttonDelete" class="btn btn-danger">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./index.js" type="javascript"></script>
+</html>
