@@ -28,7 +28,7 @@
     "@tensorflow/tfjs-vis": "^1.0.3",
     "bootstrap": "^4.4.1",
     "datatables.net-dt": "^1.10.20",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "papaparse": "^5.2.0",
     "regenerator-runtime": "^0.13.3",
     "train-test-split": "^1.0.0"
